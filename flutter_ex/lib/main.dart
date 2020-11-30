@@ -7,6 +7,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // 제목 영역
     Widget titleSelection = Container(
       padding: const EdgeInsets.all(32),
       child: Row(
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
 
     Color color = Theme.of(context).primaryColor;
 
+    // 버튼 영역
     Widget buttonSection = Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    // 설명 영역
     Widget textSection = Container(
       padding: const EdgeInsets.all(32),
       child: Text(
@@ -66,6 +69,7 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    // 전반적인 구성
     return MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
