@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:playground/presentation/widget/text/ui_text.dart';
+import 'package:playground/res/font.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -12,7 +14,7 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Category'),
+        title: UiText('카테고리', style: TextStyles.appbar),
       ),
     );
   }

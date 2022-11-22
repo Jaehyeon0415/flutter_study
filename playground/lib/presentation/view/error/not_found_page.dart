@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:playground/presentation/widget/text/ui_text.dart';
+import 'package:playground/res/font.dart';
 
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});
@@ -7,7 +9,7 @@ class NotFoundPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Not Found'),
+        title: UiText('Not Found', style: TextStyles.appbar),
       ),
     );
   }

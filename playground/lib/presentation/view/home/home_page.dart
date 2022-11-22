@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:playground/presentation/widget/text/ui_text.dart';
+import 'package:playground/res/font.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: UiText('PLAYGROUND', style: TextStyles.appbar),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:playground/presentation/widget/text/ui_text.dart';
+import 'package:playground/res/font.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -12,7 +14,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: UiText('프로필', style: TextStyles.appbar),
       ),
     );
   }

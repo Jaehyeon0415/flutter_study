@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:animations/animations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:playground/presentation/view/category/category_page.dart';
-import 'package:playground/presentation/view/chat/chat_page.dart';
-import 'package:playground/presentation/view/error/not_found_page.dart';
-import 'package:playground/presentation/view/home/home_page.dart';
-import 'package:playground/presentation/view/login/login_page.dart';
-import 'package:playground/presentation/view/profile/profile_page.dart';
-import 'package:playground/presentation/view/scaffold/scaffold_with_bottom_navbar.dart';
-import 'package:playground/presentation/view/splash/splash_page.dart';
+import 'package:playground/presentation/view/page_package.dart';
+import 'package:playground/res/duration.dart';
 
 class AppRouter {
   static const String splash = '/splash';
   static const String login = '/login';
-  // static const String main = '/';
   static const String home = '/home';
   static const String category = '/category';
   static const String chat = '/chat';
@@ -41,8 +35,20 @@ class AppRouter {
       GoRoute(path: splash, name: 'splash', pageBuilder: _splashPageBuilder),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) {
-          return ScaffoldWithBottomNavBar(child: child);
+        pageBuilder: (context, state, child) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: Durations.transition,
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeThroughTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                child: child,
+              );
+            },
+            child: ScaffoldWithBottomNavBar(child: child),
+          );
         },
         routes: [
           GoRoute(path: home, name: 'home', pageBuilder: _homePageBuilder),

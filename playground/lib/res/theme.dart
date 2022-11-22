@@ -25,7 +25,7 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: UiColor.white,
         foregroundColor: UiColor.black,
-        elevation: 0,
+        elevation: 0.5,
         centerTitle: true,
       ),
       splashColor: Colors.transparent,

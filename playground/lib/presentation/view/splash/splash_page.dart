@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:playground/presentation/widget/text/ui_text.dart';
+import 'package:playground/res/font.dart';
 import 'package:playground/router/app_router.dart';
 
 class SplashPage extends StatefulWidget {
@@ -18,17 +20,10 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Material(
+    return Material(
       color: Colors.black,
       child: Center(
-        child: Text(
-          'PLAYGROUND',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        child: UiText('PLAYGROUND', style: TextStyles.logo),
       ),
     );
   }

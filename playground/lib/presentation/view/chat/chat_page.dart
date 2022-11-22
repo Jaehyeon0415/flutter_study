@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:playground/presentation/widget/text/ui_text.dart';
+import 'package:playground/res/font.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -12,7 +14,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat'),
+        title: UiText('채팅', style: TextStyles.appbar),
       ),
     );
   }

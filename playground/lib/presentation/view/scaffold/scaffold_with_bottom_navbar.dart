@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playground/presentation/view/scaffold/scaffold_with_navbar_tab_item.dart';
 import 'package:playground/res/color.dart';
+import 'package:playground/router/app_router.dart';
+import 'package:playground/util/haptic.dart';
 
 class ScaffoldWithBottomNavBar extends StatefulWidget {
   const ScaffoldWithBottomNavBar({super.key, required this.child});
@@ -16,22 +18,22 @@ class ScaffoldWithBottomNavBar extends StatefulWidget {
 class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
   final tabs = const [
     ScaffoldWithNavBarTabItem(
-      initialLocation: '/home',
+      initialLocation: AppRouter.home,
       icon: Icon(Icons.home_rounded),
       label: 'Home',
     ),
     ScaffoldWithNavBarTabItem(
-      initialLocation: '/category',
+      initialLocation: AppRouter.category,
       icon: Icon(Icons.menu_rounded),
       label: 'Category',
     ),
     ScaffoldWithNavBarTabItem(
-      initialLocation: '/chat',
+      initialLocation: AppRouter.chat,
       icon: Icon(Icons.chat_rounded),
       label: 'Chat',
     ),
     ScaffoldWithNavBarTabItem(
-      initialLocation: '/profile',
+      initialLocation: AppRouter.profile,
       icon: Icon(Icons.person_outline_rounded),
       label: 'Profile',
     )
@@ -51,6 +53,7 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
           elevation: 0,
           backgroundColor: UiColor.white,
           selectedItemColor: UiColor.primary,
+          unselectedItemColor: Colors.grey.shade500,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: tabs,
@@ -66,14 +69,12 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
   int _locationToTabIndex(String location) {
     final index =
         tabs.indexWhere((t) => location.startsWith(t.initialLocation));
-    // if index not found (-1), return 0
     return index < 0 ? 0 : index;
   }
 
-  // callback used to navigate to the desired tab
   void _onItemTapped(BuildContext context, int tabIndex) {
+    Haptic.light();
     if (tabIndex != _currentIndex) {
-      // go to the initial location of the selected tab (by index)
       context.go(tabs[tabIndex].initialLocation);
     }
   }
