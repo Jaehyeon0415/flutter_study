@@ -7,28 +7,30 @@ import 'package:playground/res/color.dart';
 import 'package:playground/res/font.dart';
 import 'package:playground/router/app_router.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.5,
+        title: UiText('로그인', style: TextStyles.appbar),
+      ),
       body: SafeArea(
         child: PaddedColumn(
           mainAxisAlignment: MainAxisAlignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
             const Spacer(),
-            UiText('PLAYGROUND', style: TextStyles.logo),
-            const Spacer(),
             UiTextButton(
-              '둘러보기',
-              onTap: () => context.push(GoPath.signin),
+              '서비스 이용하기',
+              onTap: () => context.go(GoPath.home),
               textColor: UiColor.white,
               backgroundColor: UiColor.black,
             ),

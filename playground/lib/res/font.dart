@@ -16,6 +16,7 @@ class FontSizes {
   static double get s28 => 28;
   static double get s32 => 32;
   static double get s36 => 36;
+  static double get s40 => 40;
 }
 
 class TextStyles {
@@ -29,13 +30,20 @@ class TextStyles {
   );
 
   static TextStyle logo = notoSansKR.copyWith(
-    fontSize: FontSizes.s36,
+    fontSize: FontSizes.s40,
     fontWeight: FontWeight.w700,
-    color: UiColor.white,
   );
 
   static TextStyle appbar = notoSansKR.copyWith(
     fontSize: FontSizes.s18,
     fontWeight: FontWeight.w600,
+    height: 1.5,
+  );
+
+  static TextStyle button = notoSansKR.copyWith(
+    fontSize: FontSizes.s20,
+    fontWeight: FontWeight.w600,
+    color: UiColor.black,
+    height: 1.25,
   );
 }

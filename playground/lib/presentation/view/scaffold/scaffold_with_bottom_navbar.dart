@@ -18,22 +18,22 @@ class ScaffoldWithBottomNavBar extends StatefulWidget {
 class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
   final tabs = const [
     ScaffoldWithNavBarTabItem(
-      initialLocation: AppRouter.home,
+      initialLocation: GoPath.home,
       icon: Icon(Icons.home_rounded),
       label: 'Home',
     ),
     ScaffoldWithNavBarTabItem(
-      initialLocation: AppRouter.category,
+      initialLocation: GoPath.category,
       icon: Icon(Icons.menu_rounded),
       label: 'Category',
     ),
     ScaffoldWithNavBarTabItem(
-      initialLocation: AppRouter.chat,
+      initialLocation: GoPath.chat,
       icon: Icon(Icons.chat_rounded),
       label: 'Chat',
     ),
     ScaffoldWithNavBarTabItem(
-      initialLocation: AppRouter.profile,
+      initialLocation: GoPath.profile,
       icon: Icon(Icons.person_outline_rounded),
       label: 'Profile',
     )
@@ -64,18 +64,40 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
     );
   }
 
-  int get _currentIndex => _locationToTabIndex(GoRouter.of(context).location);
-
-  int _locationToTabIndex(String location) {
-    final index =
-        tabs.indexWhere((t) => location.startsWith(t.initialLocation));
-    return index < 0 ? 0 : index;
+  int get _currentIndex {
+    final String location = GoRouterState.of(context).location;
+    if (location.startsWith(GoPath.home)) {
+      return 0;
+    }
+    if (location.startsWith(GoPath.category)) {
+      return 1;
+    }
+    if (location.startsWith(GoPath.chat)) {
+      return 2;
+    }
+    if (location.startsWith(GoPath.profile)) {
+      return 3;
+    }
+    return 0;
   }
 
   void _onItemTapped(BuildContext context, int tabIndex) {
     Haptic.light();
     if (tabIndex != _currentIndex) {
-      context.go(tabs[tabIndex].initialLocation);
+      switch (tabIndex) {
+        case 0:
+          GoRouter.of(context).go(GoPath.home);
+          break;
+        case 1:
+          GoRouter.of(context).go(GoPath.category);
+          break;
+        case 2:
+          GoRouter.of(context).go(GoPath.chat);
+          break;
+        case 3:
+          GoRouter.of(context).go(GoPath.profile);
+          break;
+      }
     }
   }
 }

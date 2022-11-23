@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:playground/res/theme.dart';
 import 'package:playground/router/app_router.dart';
+import 'package:playground/util/system.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemUtil.lightSystemUi();
+
   runApp(const App());
 }
 
@@ -26,7 +31,10 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       theme: appThemeData,
       locale: theme.local,
-      routerConfig: goRouter.router,
+      // routerConfig: goRouter.router,
+      routerDelegate: goRouter.router.routerDelegate,
+      routeInformationParser: goRouter.router.routeInformationParser,
+      routeInformationProvider: goRouter.router.routeInformationProvider,
     );
   }
 }
