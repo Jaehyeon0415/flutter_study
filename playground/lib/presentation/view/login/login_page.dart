@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
             const Spacer(),
             UiTextButton(
               '둘러보기',
-              onTap: () => context.push(GoPath.signin),
+              onTap: () => context.pushNamed(GoPath.signin),
               textColor: UiColor.white,
               backgroundColor: UiColor.black,
             ),

@@ -27,11 +27,10 @@ class _AppState extends State<App> {
     ThemeData appThemeData = theme.toThemeData();
 
     return MaterialApp.router(
-      title: 'Playground',
       debugShowCheckedModeBanner: false,
+      title: 'Playground',
       theme: appThemeData,
       locale: theme.local,
-      // routerConfig: goRouter.router,
       routerDelegate: goRouter.router.routerDelegate,
       routeInformationParser: goRouter.router.routeInformationParser,
       routeInformationProvider: goRouter.router.routeInformationProvider,

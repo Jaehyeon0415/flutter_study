@@ -40,7 +40,7 @@ class _SplashPageState extends State<SplashPage> {
     return Future.delayed(const Duration(seconds: 2), () {
       // Initialize app data...
       // Get router path
-      context.go(GoPath.login);
+      context.goNamed(GoPath.login);
       // context.go(AppRouter.home);
     });
   }

@@ -30,7 +30,7 @@ class _SigninPageState extends State<SigninPage> {
             const Spacer(),
             UiTextButton(
               '서비스 이용하기',
-              onTap: () => context.go(GoPath.home),
+              onTap: () => context.goNamed(GoPath.home),
               textColor: UiColor.white,
               backgroundColor: UiColor.black,
             ),

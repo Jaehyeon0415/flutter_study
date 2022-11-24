@@ -7,50 +7,47 @@ import 'package:playground/presentation/view/setting/setting_page.dart';
 import 'package:playground/res/duration.dart';
 
 class GoPath {
-  static const String splash = '/splash';
-  static const String login = '/login';
-  static const String signin = '/signin';
-  static const String home = '/home';
-  static const String category = '/category';
-  static const String chat = '/chat';
-  static const String profile = '/profile';
+  static const String splash = 'splash';
+  static const String login = 'login';
+  static const String signin = 'signin';
+  static const String home = 'home';
+  static const String category = 'category';
+  static const String chat = 'chat';
+  static const String profile = 'profile';
   static const String setting = 'setting';
 }
 
 class AppRouter {
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
-  static Page _splashPageBuilder(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(child: SplashPage());
-
-  static Page _loginPageBuilder(BuildContext context, GoRouterState state) =>
-      CustomTransitionPage(
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            FadeTransition(opacity: animation, child: child),
-        child: const LoginPage(),
-      );
-  static Page _signinPageBuilder(BuildContext context, GoRouterState state) =>
-      const MaterialPage(child: SigninPage());
-  static Page _homePageBuilder(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(child: HomePage());
-  static Page _categoryPageBuilder(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(child: CategoryPage());
-  static Page _chatPageBuilder(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(child: ChatPage());
-  static Page _profilePageBuilder(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(child: ProfilePage());
-  static Page _settingPageBuilder(BuildContext context, GoRouterState state) =>
-      const MaterialPage(child: SettingPage());
-
   final GoRouter _router = GoRouter(
-    initialLocation: GoPath.splash,
+    debugLogDiagnostics: true,
+    navigatorKey: _rootNavigatorKey,
+    initialLocation: '/splash',
     routes: [
       GoRoute(
-          path: GoPath.splash, name: 'splash', pageBuilder: _splashPageBuilder),
+        path: '/splash',
+        name: GoPath.splash,
+        pageBuilder: (context, state) =>
+            MaterialPage(key: state.pageKey, child: const SplashPage()),
+      ),
       GoRoute(
-          path: GoPath.login, name: 'login', pageBuilder: _loginPageBuilder),
+        path: '/login',
+        name: GoPath.login,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+          child: const LoginPage(),
+        ),
+      ),
       GoRoute(
-          path: GoPath.signin, name: 'signin', pageBuilder: _signinPageBuilder),
+        path: '/signin',
+        name: GoPath.signin,
+        pageBuilder: (context, state) =>
+            MaterialPage(key: state.pageKey, child: const SigninPage()),
+      ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
         pageBuilder: (context, state, child) {
@@ -70,23 +67,34 @@ class AppRouter {
         },
         routes: [
           GoRoute(
-              path: GoPath.home, name: 'home', pageBuilder: _homePageBuilder),
-          GoRoute(
-            path: GoPath.category,
-            name: 'category',
-            pageBuilder: _categoryPageBuilder,
+            path: '/home',
+            name: GoPath.home,
+            pageBuilder: (context, state) =>
+                NoTransitionPage(key: state.pageKey, child: const HomePage()),
           ),
           GoRoute(
-              path: GoPath.chat, name: 'chat', pageBuilder: _chatPageBuilder),
+            path: '/category',
+            name: GoPath.category,
+            pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey, child: const CategoryPage()),
+          ),
           GoRoute(
-            path: GoPath.profile,
-            name: 'profile',
-            pageBuilder: _profilePageBuilder,
+            path: '/chat',
+            name: GoPath.chat,
+            pageBuilder: (context, state) =>
+                NoTransitionPage(key: state.pageKey, child: const ChatPage()),
+          ),
+          GoRoute(
+            path: '/profile',
+            name: GoPath.profile,
+            pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey, child: const ProfilePage()),
             routes: [
               GoRoute(
-                path: GoPath.setting,
-                name: 'setting',
-                pageBuilder: _settingPageBuilder,
+                path: 'setting',
+                name: GoPath.setting,
+                pageBuilder: (context, state) => MaterialPage(
+                    key: state.pageKey, child: const SettingPage()),
               ),
             ],
           ),

@@ -66,16 +66,16 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
 
   int get _currentIndex {
     final String location = GoRouterState.of(context).location;
-    if (location.startsWith(GoPath.home)) {
+    if (location.startsWith('/home')) {
       return 0;
     }
-    if (location.startsWith(GoPath.category)) {
+    if (location.startsWith('/category')) {
       return 1;
     }
-    if (location.startsWith(GoPath.chat)) {
+    if (location.startsWith('/chat')) {
       return 2;
     }
-    if (location.startsWith(GoPath.profile)) {
+    if (location.startsWith('/profile')) {
       return 3;
     }
     return 0;
@@ -86,16 +86,16 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
     if (tabIndex != _currentIndex) {
       switch (tabIndex) {
         case 0:
-          GoRouter.of(context).go(GoPath.home);
+          GoRouter.of(context).goNamed(GoPath.home);
           break;
         case 1:
-          GoRouter.of(context).go(GoPath.category);
+          GoRouter.of(context).goNamed(GoPath.category);
           break;
         case 2:
-          GoRouter.of(context).go(GoPath.chat);
+          GoRouter.of(context).goNamed(GoPath.chat);
           break;
         case 3:
-          GoRouter.of(context).go(GoPath.profile);
+          GoRouter.of(context).goNamed(GoPath.profile);
           break;
       }
     }
