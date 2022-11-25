@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playground/presentation/view/login/signin_page.dart';
 import 'package:playground/presentation/view/page_package.dart';
+import 'package:playground/presentation/view/product/product_detail_page.dart';
 import 'package:playground/presentation/view/setting/setting_page.dart';
-import 'package:playground/res/duration.dart';
 
 class GoPath {
   static const String splash = 'splash';
@@ -15,11 +14,12 @@ class GoPath {
   static const String chat = 'chat';
   static const String profile = 'profile';
   static const String setting = 'setting';
+  static const String productDetail = 'productDetail';
 }
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _shellNavigatorKey = GlobalKey<NavigatorState>();
+  // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   final GoRouter _router = GoRouter(
     debugLogDiagnostics: true,
@@ -48,57 +48,101 @@ class AppRouter {
         pageBuilder: (context, state) =>
             MaterialPage(key: state.pageKey, child: const SigninPage()),
       ),
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        pageBuilder: (context, state, child) {
-          return CustomTransitionPage(
+      GoRoute(
+        path: '/:screen(home|category|chat|profile)',
+        pageBuilder: (context, state) {
+          final screen = state.params['screen'];
+          int index;
+          switch (screen) {
+            case 'home':
+              index = 0;
+              break;
+            case 'category':
+              index = 1;
+              break;
+            case 'chat':
+              index = 2;
+              break;
+            case 'profile':
+              index = 3;
+              break;
+            default:
+              index = 0;
+              break;
+          }
+          return NoTransitionPage(
             key: state.pageKey,
-            transitionDuration: Durations.transition,
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              return FadeThroughTransition(
-                animation: animation,
-                secondaryAnimation: secondaryAnimation,
-                child: child,
-              );
-            },
-            child: ScaffoldWithBottomNavBar(child: child),
+            child: ScaffoldWithBottomNavBar(index: index),
           );
         },
-        routes: [
-          GoRoute(
-            path: '/home',
-            name: GoPath.home,
-            pageBuilder: (context, state) =>
-                NoTransitionPage(key: state.pageKey, child: const HomePage()),
+      ),
+      // ShellRoute(
+      //   navigatorKey: _shellNavigatorKey,
+      //   pageBuilder: (context, state, child) {
+      //     return CustomTransitionPage(
+      //       key: state.pageKey,
+      //       transitionDuration: Durations.transition,
+      //       transitionsBuilder:
+      //           (context, animation, secondaryAnimation, child) {
+      //         return FadeThroughTransition(
+      //           animation: animation,
+      //           secondaryAnimation: secondaryAnimation,
+      //           child: child,
+      //         );
+      //       },
+      //       child: ScaffoldWithBottomNavBar(child: child),
+      //     );
+      //   },
+      //   routes: [
+      //     GoRoute(
+      //       path: '/home',
+      //       name: GoPath.home,
+      //       pageBuilder: (context, state) =>
+      //           NoTransitionPage(key: state.pageKey, child: const HomePage()),
+      //     ),
+      //     GoRoute(
+      //       path: '/category',
+      //       name: GoPath.category,
+      //       pageBuilder: (context, state) => NoTransitionPage(
+      //           key: state.pageKey, child: const CategoryPage()),
+      //     ),
+      //     GoRoute(
+      //       path: '/chat',
+      //       name: GoPath.chat,
+      //       pageBuilder: (context, state) =>
+      //           NoTransitionPage(key: state.pageKey, child: const ChatPage()),
+      //     ),
+      //     GoRoute(
+      //       path: '/profile',
+      //       name: GoPath.profile,
+      //       pageBuilder: (context, state) => NoTransitionPage(
+      //           key: state.pageKey, child: const ProfilePage()),
+      //       routes: [
+      //         GoRoute(
+      //           path: 'setting',
+      //           name: GoPath.setting,
+      //           pageBuilder: (context, state) => MaterialPage(
+      //               key: state.pageKey, child: const SettingPage()),
+      //         ),
+      //       ],
+      //     ),
+      //   ],
+      // ),
+      GoRoute(
+        path: '/product/:productId',
+        name: GoPath.productDetail,
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: ProductDetailPage(
+            productId: int.parse(state.params['productId'] as String),
           ),
-          GoRoute(
-            path: '/category',
-            name: GoPath.category,
-            pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey, child: const CategoryPage()),
-          ),
-          GoRoute(
-            path: '/chat',
-            name: GoPath.chat,
-            pageBuilder: (context, state) =>
-                NoTransitionPage(key: state.pageKey, child: const ChatPage()),
-          ),
-          GoRoute(
-            path: '/profile',
-            name: GoPath.profile,
-            pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey, child: const ProfilePage()),
-            routes: [
-              GoRoute(
-                path: 'setting',
-                name: GoPath.setting,
-                pageBuilder: (context, state) => MaterialPage(
-                    key: state.pageKey, child: const SettingPage()),
-              ),
-            ],
-          ),
-        ],
+        ),
+      ),
+      GoRoute(
+        path: '/profile/setting',
+        name: GoPath.setting,
+        pageBuilder: (context, state) =>
+            MaterialPage(key: state.pageKey, child: const SettingPage()),
       ),
     ],
     errorBuilder: (context, state) => const NotFoundPage(),

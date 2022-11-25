@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage>
           title: UiText('프로필', style: TextStyles.appbar),
           actions: [
             IconButton(
-              onPressed: () => GoRouter.of(context).push('/profile/setting'),
+              onPressed: () => GoRouter.of(context).push('/setting'),
               icon: const Icon(Icons.settings, color: UiColor.grey),
             ),
           ],

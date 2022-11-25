@@ -5,7 +5,6 @@ import 'package:playground/presentation/widget/flexible/padded_flexibles.dart';
 import 'package:playground/presentation/widget/text/ui_text.dart';
 import 'package:playground/res/color.dart';
 import 'package:playground/res/font.dart';
-import 'package:playground/router/app_router.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -30,7 +29,7 @@ class _SigninPageState extends State<SigninPage> {
             const Spacer(),
             UiTextButton(
               '서비스 이용하기',
-              onTap: () => context.goNamed(GoPath.home),
+              onTap: () => context.go('/home'),
               textColor: UiColor.white,
               backgroundColor: UiColor.black,
             ),
