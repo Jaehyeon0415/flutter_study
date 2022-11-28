@@ -10,5 +10,5 @@ class UiColor {
 
   static const grey = Color(0xff646464);
 
-  static const divider = Color(0xfff5f5f5);
+  static const divider = Color(0xffe8e8e8);
 }

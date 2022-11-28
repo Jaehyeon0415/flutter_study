@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:playground/data/model/member.dart';
 
 part 'product.g.dart';
 
@@ -13,6 +14,9 @@ class Product {
   @JsonKey(name: 'category')
   final String category;
 
+  @JsonKey(name: 'author')
+  final Member author;
+
   @JsonKey(name: 'image')
   final String? image;
 
@@ -20,6 +24,7 @@ class Product {
     required this.id,
     required this.title,
     required this.category,
+    required this.author,
     required this.image,
   });
 

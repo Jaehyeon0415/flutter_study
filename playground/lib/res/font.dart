@@ -44,6 +44,27 @@ class TextStyles {
     fontSize: FontSizes.s20,
     fontWeight: FontWeight.w600,
     color: UiColor.black,
-    height: 1.25,
+    height: 1.3,
+  );
+
+  static TextStyle title = notoSansKR.copyWith(
+    fontSize: FontSizes.s20,
+    fontWeight: FontWeight.w600,
+    color: UiColor.black,
+    height: 1.3,
+  );
+
+  static TextStyle title2 = notoSansKR.copyWith(
+    fontSize: FontSizes.s18,
+    fontWeight: FontWeight.w600,
+    color: UiColor.black,
+    height: 1.3,
+  );
+
+  static TextStyle title3 = notoSansKR.copyWith(
+    fontSize: FontSizes.s16,
+    fontWeight: FontWeight.w600,
+    color: UiColor.black,
+    height: 1.5,
   );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:playground/data/model/product.dart';
 import 'package:playground/presentation/view/login/signin_page.dart';
 import 'package:playground/presentation/view/page_package.dart';
 import 'package:playground/presentation/view/product/product_detail_page.dart';
@@ -76,6 +77,23 @@ class AppRouter {
           );
         },
       ),
+      GoRoute(
+        path: '/product/:productId',
+        name: GoPath.productDetail,
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: ProductDetailPage(
+            productId: int.parse(state.params['productId'] as String),
+            data: state.extra as Product,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: '/profile/setting',
+        name: GoPath.setting,
+        pageBuilder: (context, state) =>
+            MaterialPage(key: state.pageKey, child: const SettingPage()),
+      ),
       // ShellRoute(
       //   navigatorKey: _shellNavigatorKey,
       //   pageBuilder: (context, state, child) {
@@ -128,22 +146,6 @@ class AppRouter {
       //     ),
       //   ],
       // ),
-      GoRoute(
-        path: '/product/:productId',
-        name: GoPath.productDetail,
-        pageBuilder: (context, state) => MaterialPage(
-          key: state.pageKey,
-          child: ProductDetailPage(
-            productId: int.parse(state.params['productId'] as String),
-          ),
-        ),
-      ),
-      GoRoute(
-        path: '/profile/setting',
-        name: GoPath.setting,
-        pageBuilder: (context, state) =>
-            MaterialPage(key: state.pageKey, child: const SettingPage()),
-      ),
     ],
     errorBuilder: (context, state) => const NotFoundPage(),
   );
